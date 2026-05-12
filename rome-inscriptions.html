@@ -2,56 +2,17 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="refresh" content="0; url=https://greek-metrical-inscriptions.wikibase.cloud/query/##title: all inscriptions from Rome
-PREFIX gp: <https://greek-metrical-inscriptions.wikibase.cloud/prop/>
-PREFIX gpq: <https://greek-metrical-inscriptions.wikibase.cloud/prop/qualifier/>
-PREFIX gpqn: <https://greek-metrical-inscriptions.wikibase.cloud/prop/qualifier/value-normalized/>
-PREFIX gpqv: <https://greek-metrical-inscriptions.wikibase.cloud/prop/qualifier/value/>
-PREFIX gpr: <https://greek-metrical-inscriptions.wikibase.cloud/prop/reference/>
-PREFIX gprn: <https://greek-metrical-inscriptions.wikibase.cloud/prop/reference/value-normalized/>
-PREFIX gprv: <https://greek-metrical-inscriptions.wikibase.cloud/prop/reference/value/>
-PREFIX gpsv: <https://greek-metrical-inscriptions.wikibase.cloud/prop/statement/value/>
-PREFIX gps: <https://greek-metrical-inscriptions.wikibase.cloud/prop/statement/>
-PREFIX gpsn: <https://greek-metrical-inscriptions.wikibase.cloud/prop/statement/value-normalized/>
-PREFIX gd: <https://greek-metrical-inscriptions.wikibase.cloud/entity/>
-PREFIX gdno: <https://greek-metrical-inscriptions.wikibase.cloud/prop/novalue/>
-PREFIX gdref: <https://greek-metrical-inscriptions.wikibase.cloud/reference/>
-PREFIX gds: <https://greek-metrical-inscriptions.wikibase.cloud/entity/statement/>
-PREFIX gdt: <https://greek-metrical-inscriptions.wikibase.cloud/prop/direct/>
-PREFIX gdtn: <https://greek-metrical-inscriptions.wikibase.cloud/prop/direct-normalized/>
-PREFIX gdv: <https://greek-metrical-inscriptions.wikibase.cloud/value/>
-SELECT ?inscriptions ?inscriptionslabel ?editionURL ?typeofinscriptionlabel ?provenanceregionlabel ?provenancecitylabel ?supportlabel ?authorshiplabel ?date 
-(GROUP_CONCAT(DISTINCT ?meterlabel; separator=", ") AS ?meter) 
-(GROUP_CONCAT(DISTINCT ?layoutlabel; separator=", ") AS ?layout)
-(GROUP_CONCAT(DISTINCT ?recipientlabel; separator=", ") AS ?recipient)
-(GROUP_CONCAT(DISTINCT ?clientlabel; separator=", ") AS ?client)
-WHERE {
-  ?inscriptions gdt:P4 gd:Q698 ;
-               gdt:P7 ?editionURL ;
-               gdt:P6 ?typeofinscription ;
-               gdt:P16 ?provenanceregion ;
-               gdt:P4 ?provenancecity ;
-               gdt:P10 ?support ;
-               gdt:P8 ?meter ;
-               gdt:P15 ?layout ;
-               gdt:P35 ?authorship ;
-               gdt:P22 ?date ;
-               gdt:P37 ?client ;
-               gdt:P38 ?recipient . FILTER(DATATYPE(?date) = xsd:edtf) .     
-  ?inscriptions rdfs:label ?inscriptionslabel FILTER(LANG(?inscriptionslabel) = 'en')              
-  ?typeofinscription rdfs:label ?typeofinscriptionlabel FILTER(LANG(?typeofinscriptionlabel) = 'en')
-  ?provenanceregion rdfs:label ?provenanceregionlabel FILTER(LANG(?provenanceregionlabel) = 'en')
-  ?provenancecity rdfs:label ?provenancecitylabel FILTER(LANG(?provenancecitylabel) = 'en')
-  ?meter rdfs:label ?meterlabel FILTER(LANG(?meterlabel) = 'en')
-  ?support rdfs:label ?supportlabel FILTER(LANG(?supportlabel) = 'en')
-  ?layout rdfs:label ?layoutlabel FILTER(LANG(?layoutlabel) = 'en')
-  ?authorship rdfs:label ?authorshiplabel FILTER(LANG(?authorshiplabel) = 'en')
-  ?client rdfs:label ?clientlabel FILTER(LANG(?clientlabel) = 'en')
-  ?recipient rdfs:label ?recipientlabel FILTER(LANG(?recipientlabel) = 'en')
-}
-GROUP BY ?inscriptions ?inscriptionslabel ?editionURL ?typeofinscriptionlabel ?provenanceregionlabel ?provenancecitylabel ?supportlabel ?authorshiplabel ?date
-ORDER BY ?inscriptionslabel">
   <title>Rome inscriptions</title>
+
+  <script>
+    const url =
+      "https://greek-metrical-inscriptions.wikibase.cloud/query/#title%3A%20all%20inscriptions%20from%20Rome%0APREFIX%20gp%3A%20%3Chttps%3A%2F%2Fgreek-metrical-inscriptions.wikibase.cloud%2Fprop%2F%3E%0APREFIX%20gpq%3A%20%3Chttps%3A%2F%2Fgreek-metrical-inscriptions.wikibase.cloud%2Fprop%2Fqualifier%2F%3E%0ASELECT%20%3Finscriptions%20%3Finscriptionslabel%20%3FeditionURL%20%3Ftypeofinscriptionlabel%20WHERE%20%7B%0A%20%20%3Finscriptions%20rdfs%3Alabel%20%3Finscriptionslabel%20FILTER%28LANG%28%3Finscriptionslabel%29%3D%27en%27%29%0A%7D";
+
+    window.location.replace(url);
+  </script>
 </head>
-<body>Redirecting...</body>
+
+<body>
+Redirecting...
+</body>
 </html>
