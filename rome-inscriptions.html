@@ -18,15 +18,42 @@ PREFIX gpsv: <https://greek-metrical-inscriptions.wikibase.cloud/prop/statement/
 PREFIX gps: <https://greek-metrical-inscriptions.wikibase.cloud/prop/statement/>
 PREFIX gpsn: <https://greek-metrical-inscriptions.wikibase.cloud/prop/statement/value-normalized/>
 PREFIX gd: <https://greek-metrical-inscriptions.wikibase.cloud/entity/>
+PREFIX gdno: <https://greek-metrical-inscriptions.wikibase.cloud/prop/novalue/>
+PREFIX gdref: <https://greek-metrical-inscriptions.wikibase.cloud/reference/>
+PREFIX gds: <https://greek-metrical-inscriptions.wikibase.cloud/entity/statement/>
 PREFIX gdt: <https://greek-metrical-inscriptions.wikibase.cloud/prop/direct/>
-
-SELECT ?inscriptions ?inscriptionslabel ?editionURL
+PREFIX gdtn: <https://greek-metrical-inscriptions.wikibase.cloud/prop/direct-normalized/>
+PREFIX gdv: <https://greek-metrical-inscriptions.wikibase.cloud/value/>
+SELECT ?inscriptions ?inscriptionslabel ?editionURL ?typeofinscriptionlabel ?provenanceregionlabel ?provenancecitylabel ?supportlabel ?authorshiplabel ?date 
+(GROUP_CONCAT(DISTINCT ?meterlabel; separator=", ") AS ?meter) 
+(GROUP_CONCAT(DISTINCT ?layoutlabel; separator=", ") AS ?layout)
+(GROUP_CONCAT(DISTINCT ?recipientlabel; separator=", ") AS ?recipient)
+(GROUP_CONCAT(DISTINCT ?clientlabel; separator=", ") AS ?client)
 WHERE {
   ?inscriptions gdt:P4 gd:Q698 ;
-               gdt:P7 ?editionURL .
-  ?inscriptions rdfs:label ?inscriptionslabel
-  FILTER(LANG(?inscriptionslabel) = 'en')
+               gdt:P7 ?editionURL ;
+               gdt:P6 ?typeofinscription ;
+               gdt:P16 ?provenanceregion ;
+               gdt:P4 ?provenancecity ;
+               gdt:P10 ?support ;
+               gdt:P8 ?meter ;
+               gdt:P15 ?layout ;
+               gdt:P35 ?authorship ;
+               gdt:P22 ?date ;
+               gdt:P37 ?client ;
+               gdt:P38 ?recipient . FILTER(DATATYPE(?date) = xsd:edtf) .     
+  ?inscriptions rdfs:label ?inscriptionslabel FILTER(LANG(?inscriptionslabel) = 'en')              
+  ?typeofinscription rdfs:label ?typeofinscriptionlabel FILTER(LANG(?typeofinscriptionlabel) = 'en')
+  ?provenanceregion rdfs:label ?provenanceregionlabel FILTER(LANG(?provenanceregionlabel) = 'en')
+  ?provenancecity rdfs:label ?provenancecitylabel FILTER(LANG(?provenancecitylabel) = 'en')
+  ?meter rdfs:label ?meterlabel FILTER(LANG(?meterlabel) = 'en')
+  ?support rdfs:label ?supportlabel FILTER(LANG(?supportlabel) = 'en')
+  ?layout rdfs:label ?layoutlabel FILTER(LANG(?layoutlabel) = 'en')
+  ?authorship rdfs:label ?authorshiplabel FILTER(LANG(?authorshiplabel) = 'en')
+  ?client rdfs:label ?clientlabel FILTER(LANG(?clientlabel) = 'en')
+  ?recipient rdfs:label ?recipientlabel FILTER(LANG(?recipientlabel) = 'en')
 }
+GROUP BY ?inscriptions ?inscriptionslabel ?editionURL ?typeofinscriptionlabel ?provenanceregionlabel ?provenancecitylabel ?supportlabel ?authorshiplabel ?date
 ORDER BY ?inscriptionslabel
 `;
 
